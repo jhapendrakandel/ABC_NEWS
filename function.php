@@ -41,6 +41,15 @@ function abcnepal_styles() {
         $theme_version
     );
 
+    // Header navigation drawer (JS-driven, replaces old CSS checkbox toggle)
+    wp_enqueue_script(
+        'abc-header-nav',
+        get_template_directory_uri() . '/header-nav.js',
+        array(),
+        $theme_version,
+        true
+    );
+
     if (is_page_template('page-live-update.php') || is_page(array('liveupdate', 'live-update')) || abcnepal_is_live_update_path()) {
         wp_enqueue_script(
             'abc-live-update',
@@ -49,7 +58,6 @@ function abcnepal_styles() {
             $theme_version,
             true
         );
-
         wp_localize_script(
             'abc-live-update',
             'abcLiveUpdate',
