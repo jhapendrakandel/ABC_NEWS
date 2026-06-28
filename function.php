@@ -32,12 +32,13 @@ function abcnepal_is_live_update_path() {
 
 
 function abcnepal_styles() {
+    $theme_version = wp_get_theme()->get( 'Version' ) ?: '1.0.0';
 
     wp_enqueue_style(
         'abc-style',
         get_stylesheet_uri(),
         array(),
-        time()
+        $theme_version
     );
 
     if (is_page_template('page-live-update.php') || is_page(array('liveupdate', 'live-update')) || abcnepal_is_live_update_path()) {
@@ -45,7 +46,7 @@ function abcnepal_styles() {
             'abc-live-update',
             get_template_directory_uri() . '/js/live-update.js',
             array('jquery'),
-            time(),
+            $theme_version,
             true
         );
 
@@ -633,20 +634,8 @@ function load_more_updates() {
     wp_die();
 }
 
-// Add this to your existing functions.php
+// enable_post_hierarchy registered at single definition site
 add_action('init', 'enable_post_hierarchy');
 function enable_post_hierarchy() {
     add_post_type_support('post', 'page-attributes');
 }
-
-
-
-function register_live_update_cpt() {
-    register_post_type('live_update', [
-        'labels' => ['name' => 'Live Updates'],
-        'public' => true,
-        'supports' => ['title', 'editor', 'thumbnail', 'author'],
-        'menu_icon' => 'dashicons-rss',
-    ]);
-}
-add_action('init', 'register_live_update_cpt');
