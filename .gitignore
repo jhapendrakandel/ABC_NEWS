@@ -1,0 +1,25 @@
+# Environment and local stack secrets — never commit to production
+.env
+.env.local
+
+# Docker local state
+uploads/
+themedata/
+
+# OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Build artifacts
+node_modules/
+vendor/
